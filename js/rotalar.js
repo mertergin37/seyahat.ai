@@ -1,5 +1,5 @@
 // seyahat.ai - Destinasyon Veritabanı (CORS Güvenlik Engellerini Aşmak İçin JS Formatındadır)
-const SEYAHAT_ROUTES_DATA = {
+window.SEYAHAT_ROUTES_DATA = {
   "bali-luxury-escape": {
     "title": "Bali Egzotik Kaçış",
     "badge": "Tropikal • Macera • Premium",

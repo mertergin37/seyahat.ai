@@ -1,5 +1,5 @@
 // seyahatai.com - Global Konfigürasyon Dosyası
-const SeyahatAIConfig = {
+window.SeyahatAIConfig = {
     // Travelpayouts / Booking.com Affiliate ID (aid) değeriniz
     affiliateId: "YOUR_PARTNER_ID",
     

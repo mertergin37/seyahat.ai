@@ -73,7 +73,6 @@ ul {
     z-index: 1000;
     transition: var(--transition);
     border-bottom: 1px solid transparent;
-    pointer-events: none;
 }
 
 .navbar.scrolled {
@@ -109,7 +108,6 @@ ul {
     align-items: center;
     height: 80px;
     transition: var(--transition);
-    pointer-events: auto;
 }
 
 .navbar.scrolled .nav-container {
@@ -1791,17 +1789,16 @@ body {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 10000;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
     transition: var(--transition);
 }
 
 .auth-modal-overlay.active {
+    display: flex;
     opacity: 1;
-    visibility: visible;
 }
 
 .auth-modal-box {

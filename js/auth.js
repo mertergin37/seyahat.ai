@@ -1,6 +1,6 @@
 // seyahat.ai - Kullanıcı Giriş/Kayıt ve Oturum Yönetim Scripti (LocalStorage Tabanlı)
 
-const SEYAHAT_AUTH = {
+window.SEYAHAT_AUTH = {
     // 1. Oturum durumunu getirme
     getLoggedInUser: function() {
         try {
