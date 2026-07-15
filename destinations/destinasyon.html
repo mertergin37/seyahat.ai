@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yükleniyor... - Seyahat AI</title>
+    <meta name="description" content="Yapay zeka ile kişiselleştirilmiş lüks tatil rotasını inceleyin. En iyi 3 oteli ve fiyat tekliflerini karşılaştırın." id="meta-description">
+    <link rel="stylesheet" href="../css/theme.css?v=1.3">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- Open Graph / Social Share Metadata -->
+    <meta property="og:title" content="Lüks Kaçış Rotaları - seyahat.ai" id="og-title">
+    <meta property="og:description" content="Yapay zeka ile seçilmiş en iyi otel seçeneklerini karşılaştırın." id="og-description">
+    <meta property="og:image" content="../assets/images/og-share-cover.jpg">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar scrolled" id="site-header">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo" id="logo-link">seyahat<span>.ai</span></a>
+            
+            <nav class="nav-menu" id="navigation-menu">
+                <a href="../index.html" class="nav-link" id="nav-home">Ana Sayfa</a>
+                <a href="../index.html#trending" class="nav-link" id="nav-destinations">Trend Rotalar</a>
+                <a href="../index.html#why-us" class="nav-link" id="nav-why-us">Neden Biz?</a>
+                <a href="../quiz.html" class="nav-cta" id="nav-start-quiz">Seyahat Analizi Başlat</a>
+            </nav>
+            
+            <button class="nav-toggle" id="menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Destination Hero Section -->
+    <section class="dest-hero" id="dest-hero-block">
+        <div class="dest-hero-bg">
+            <img src="" alt="" id="dest-hero-img">
+        </div>
+        <div class="container">
+            <div class="dest-hero-content">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+                    <div>
+                        <span class="badge" id="dest-badge">Lüks Seyahat</span>
+                        <h1 id="dest-heading" style="margin-bottom: 0;">Yükleniyor...</h1>
+                    </div>
+                    <button class="btn-favorite" id="btn-add-favorite" aria-label="Favorilere Ekle">
+                        <svg class="heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span id="fav-btn-text">Favorilerime Ekle</span>
+                    </button>
+                </div>
+                <p class="dest-intro" id="dest-intro-text">Rotalarınız yapay zeka tarafından taranıyor...</p>
+                <div class="dest-meta-list" id="dest-meta-container">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curated Matches Section -->
+    <section class="section" id="curated-hotels-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Yapay Zeka Önerisi: <span id="section-dest-title">En İyi 3 Otel</span></h2>
+                <p id="section-dest-desc">Kişiselleştirilmiş kriterlerinize göre seçilen, en yüksek puanlı premium konaklama tesisleri.</p>
+            </div>
+
+            <div class="hotel-grid" id="hotels-grid-container">
+                <!-- Loaded dynamically -->
+            </div>
+
+            <!-- Fallbacks Section -->
+            <div class="fallback-grid" id="fallback-container">
+                <!-- Fallback 1: Search Box Widget -->
+                <div class="fallback-card" id="fallback-search-card">
+                    <h3>Alternatif Otelleri Kendiniz Arayın</h3>
+                    <p id="fallback-search-description">Bölgedeki diğer premium oteller arasından kriterlerinize uyan oteli seçin, karşılaştırın.</p>
+                    
+                    <form class="search-form" id="destination-fallback-form" style="grid-template-columns: 1.5fr 1fr auto;">
+                        <div class="form-group">
+                            <label for="fallback-dest-input">Bölge / Destinasyon</label>
+                            <input type="text" class="form-control" id="fallback-dest-input" value="" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fallback-dates-input">Giriş - Çıkış Tarihleri</label>
+                            <input type="text" class="form-control" id="fallback-dates-input" placeholder="Tarihleri seçmek için tıklayın" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        </div>
+                        <button type="submit" class="btn-search" id="btn-fallback-search" style="align-self: flex-end;">Otelleri Tara</button>
+                    </form>
+                </div>
+
+                <!-- Fallback 2: WhatsApp Card -->
+                <div class="fallback-card support-card" id="fallback-support-card">
+                    <h3>Özel Seyahat Danışmanlığı</h3>
+                    <p>Karar veremediniz mi? Seyahat uzmanlarımız size özel otel fiyatları, uçuş rotaları ve VIP transfer organizasyonları için hazır.</p>
+                    <a href="#" target="_blank" class="btn-whatsapp" id="whatsapp-support-link">
+                        <span>💬</span> WhatsApp'tan Bize Yazın
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info-col">
+                    <h3>seyahat<span>.ai</span></h3>
+                    <p>Yapay zeka motoru ile desteklenen, kişiselleştirilmiş rota keşifleri ve lüks tatil rehberleri sunan meta-arama seyahat portalıdır.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><span style="font-size:18px;">📸</span></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><span style="font-size:18px;">👥</span></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><span style="font-size:18px;">🐦</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <div class="footer-links">
+                        <a href="../index.html">Ana Sayfa</a>
+                        <a href="../quiz.html">Yapay Zeka Testi</a>
+                        <a href="../index.html#trending">Trend Rotalar</a>
+                        <a href="../index.html#why-us">Neden Biz?</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popüler Rotalar</h4>
+                    <div class="footer-links">
+                        <a href="destinasyon.html?id=bali-luxury-escape">Bali Egzotik Orman</a>
+                        <a href="destinasyon.html?id=cappadocia-cave-suites">Kapadokya Mağara</a>
+                        <a href="destinasyon.html?id=swiss-alps-chalets">İsviçre Karlı Şaleler</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Yasal</h4>
+                    <div class="footer-links">
+                        <a href="../kullanim-kosullari.html">Kullanım Koşulları</a>
+                        <a href="../gizlilik-sozlesmesi.html">Gizlilik Sözleşmesi</a>
+                        <a href="../cerez-politikasi.html">Çerez Politikası</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Seyahat AI. Tüm hakları saklıdır. Bu site Booking.com ve Travelpayouts iş ortağıdır.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">İletişim</a>
+                    <a href="#">Destek</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global config and database files -->
+    <script src="../js/config.js"></script>
+    <script src="../js/rotalar.js"></script>
+    <script src="../js/auth.js"></script>
+    
+    <!-- Dynamic Router Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get route ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const routeId = urlParams.get('id') || 'bali-luxury-escape';
+            
+            // Fetch route data
+            const routeData = SEYAHAT_ROUTES_DATA[routeId];
+            
+            // Redirect if invalid ID
+            if (!routeData) {
+                window.location.href = '../index.html';
+                return;
+            }
+            
+            // 1. Populate SEO headers
+            document.title = `${routeData.title} - Seyahat AI`;
+            
+            const metaDesc = document.getElementById('meta-description');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', `${routeData.title} için özel planlanan yapay zeka seyahat planı. En iyi 3 oteli inceleyin.`);
+            }
+            
+            const ogTitle = document.getElementById('og-title');
+            if (ogTitle) ogTitle.setAttribute('content', `${routeData.title} - seyahat.ai`);
+            
+            const ogDesc = document.getElementById('og-description');
+            if (ogDesc) ogDesc.setAttribute('content', `${routeData.title} için özel seçilmiş en uygun oteller ve fiyat karşılaştırmaları.`);
+            
+            // 2. Populate Hero Details
+            const heroImg = document.getElementById('dest-hero-img');
+            if (heroImg) {
+                heroImg.src = routeData.heroImage;
+                heroImg.alt = `${routeData.title} Manzarası`;
+            }
+            
+            const badge = document.getElementById('dest-badge');
+            if (badge) badge.innerText = routeData.badge;
+            
+            const heading = document.getElementById('dest-heading');
+            if (heading) heading.innerText = routeData.title;
+            
+            const intro = document.getElementById('dest-intro-text');
+            if (intro) intro.innerText = routeData.intro;
+            
+            const metaContainer = document.getElementById('dest-meta-container');
+            if (metaContainer) {
+                metaContainer.innerHTML = `
+                    <div class="dest-meta-item"><span>🌡️</span> ${routeData.weather}</div>
+                    <div class="dest-meta-item"><span>✈️</span> ${routeData.airport}</div>
+                    <div class="dest-meta-item"><span>⌛</span> En İyi Sezon: ${routeData.bestSeason}</div>
+                `;
+            }
+            
+            // 3. Populate Curated Matches Headers
+            const sectionTitle = document.getElementById('section-dest-title');
+            if (sectionTitle) sectionTitle.innerText = `${routeData.title} En İyi Otelleri`;
+            
+            const sectionDesc = document.getElementById('section-dest-desc');
+            if (sectionDesc) {
+                sectionDesc.innerText = `Kişiselleştirilmiş kriterlerinize göre seçilen, ${routeData.title} atmosferini yansıtan en popüler konaklama tesisleri.`;
+            }
+            
+            // 4. Render Hotels Grid
+            const grid = document.getElementById('hotels-grid-container');
+            if (grid) {
+                grid.innerHTML = routeData.hotels.map((hotel, index) => `
+                    <article class="hotel-card">
+                        <div class="hotel-img-wrapper">
+                            <span class="hotel-rating">⭐ ${hotel.rating} <span>/10</span></span>
+                            <img src="${hotel.image}" alt="${hotel.name} Oteli">
+                        </div>
+                        <div class="hotel-info">
+                            <h3>${hotel.name}</h3>
+                            <div class="hotel-location"><span>📍</span> ${hotel.location}</div>
+                            <div class="hotel-highlights">
+                                ${hotel.highlights.map(hl => `
+                                    <div class="highlight-item">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        ${hl}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <a href="${SeyahatAIConfig.getBookingSearchLink(hotel.name)}" target="_blank" class="btn-booking affiliate-link" data-hotel="${hotel.name}">Tarihleri Seç & Fiyat Karşılaştır</a>
+                        </div>
+                    </article>
+                `).join('');
+            }
+            
+            // 5. Populate Fallback Box
+            const fallbackInput = document.getElementById('fallback-dest-input');
+            if (fallbackInput) fallbackInput.value = `${routeData.title}, ${routeData.fallbackQuery}`;
+            
+            const fallbackDesc = document.getElementById('fallback-search-description');
+            if (fallbackDesc) {
+                fallbackDesc.innerText = `${routeData.title} bölgesindeki diğer 500+ premium otel arasından kriterlerinize uyan oteli kendiniz seçin.`;
+            }
+            
+            const fallbackForm = document.getElementById('destination-fallback-form');
+            if (fallbackForm) {
+                fallbackForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    window.open(SeyahatAIConfig.getBookingSearchLink(routeData.fallbackQuery), '_blank');
+                });
+            }
+            
+            // 6. Populate WhatsApp Link
+            const whatsappLink = document.getElementById('whatsapp-support-link');
+            if (whatsappLink) {
+                whatsappLink.href = SeyahatAIConfig.getWhatsAppLink(routeData.supportQuery);
+            }
+            
+            // 7. Favorite Button logic
+            const favBtn = document.getElementById('btn-add-favorite');
+            const favText = document.getElementById('fav-btn-text');
+            
+            if (favBtn) {
+                // Initial state check
+                if (SEYAHAT_AUTH.isFavorite(routeId)) {
+                    favBtn.classList.add('active');
+                    favText.innerText = 'Favorilerimde';
+                }
+                
+                favBtn.addEventListener('click', () => {
+                    const loggedUser = SEYAHAT_AUTH.getLoggedInUser();
+                    if (!loggedUser) {
+                        // User not logged in, trigger login modal
+                        SEYAHAT_AUTH.openAuthModal();
+                        return;
+                    }
+                    
+                    const res = SEYAHAT_AUTH.toggleFavorite(routeId);
+                    if (res.success) {
+                        if (res.isAdded) {
+                            favBtn.classList.add('active');
+                            favText.innerText = 'Favorilerimde';
+                        } else {
+                            favBtn.classList.remove('active');
+                            favText.innerText = 'Favorilerime Ekle';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

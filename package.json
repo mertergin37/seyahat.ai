@@ -1,0 +1,13 @@
+{
+  "name": "seyahat-ai",
+  "version": "1.0.0",
+  "description": "Premium AI-driven travel discovery and meta-search portal",
+  "scripts": {
+    "dev": "vite --port 5188",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

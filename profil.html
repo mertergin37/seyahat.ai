@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim - Seyahat AI</title>
+    <meta name="description" content="Seyahat AI kullanıcı profiliniz, favori rotalarınız ve yapay zeka seyahat analizi geçmişiniz.">
+    <link rel="stylesheet" href="./css/theme.css?v=1.3">
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar scrolled" id="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo" id="logo-link">seyahat<span>.ai</span></a>
+            
+            <nav class="nav-menu" id="navigation-menu">
+                <a href="index.html" class="nav-link" id="nav-home">Ana Sayfa</a>
+                <a href="index.html#trending" class="nav-link" id="nav-destinations">Trend Rotalar</a>
+                <a href="index.html#why-us" class="nav-link" id="nav-why-us">Neden Biz?</a>
+                <a href="quiz.html" class="nav-cta" id="nav-start-quiz">Seyahat Analizi Başlat</a>
+            </nav>
+            
+            <button class="nav-toggle" id="menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="section" style="padding-top: 130px; min-height: 85vh;" id="profile-main">
+        <div class="container">
+            
+            <!-- Auth Check: Sign In Prompt (Hidden by default, shown by JS if logged out) -->
+            <div class="profile-logged-out" id="profile-logged-out-block" style="display: none;">
+                <div class="logged-out-card">
+                    <div class="logged-out-icon">🔒</div>
+                    <h2>Profilinize Erişmek İçin Giriş Yapın</h2>
+                    <p>Favori seyahat rotalarınızı kaydetmek, geçmiş yapay zeka analizlerinizi görmek ve üyelere özel VIP seyahat tekliflerinden yararlanmak için hesabınıza giriş yapın.</p>
+                    <button type="button" class="btn-search" id="profile-login-btn" style="margin: 20px auto 0 auto; padding: 14px 40px;">
+                        🔑 Hesabıma Giriş Yap
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Dashboard (Hidden by default, shown by JS if logged in) -->
+            <div class="profile-logged-in" id="profile-logged-in-block" style="display: none;">
+                
+                <div class="profile-grid-layout">
+                    
+                    <!-- Left Column: User Summary Card -->
+                    <aside class="profile-sidebar">
+                        <div class="profile-user-card">
+                            <div class="user-card-avatar">
+                                <span id="user-avatar-placeholder">U</span>
+                            </div>
+                            <h2 id="user-display-name">Kullanıcı Adı</h2>
+                            <p id="user-display-email">email@eposta.com</p>
+                            <span class="profile-badge-vip" id="user-display-level">Gold VIP Gezgin</span>
+                            
+                            <hr class="sidebar-divider">
+                            
+                            <div class="user-stats-list">
+                                <div class="stat-item">
+                                    <span class="stat-label">Kayıt Tarihi:</span>
+                                    <span class="stat-value" id="user-display-date">15.07.2026</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Seyahat Puanı:</span>
+                                    <span class="stat-value" style="color: var(--color-accent); font-weight: 700;">1,250 Puan</span>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn-quiz-prev logout-action-btn" id="sidebar-logout-btn" style="width: 100%; margin-top: 20px; border-color: #ef4444; color: #ef4444;">
+                                🚪 Oturumu Kapat
+                            </button>
+                        </div>
+                    </aside>
+                    
+                    <!-- Right Column: Details Pane (Favorites & History) -->
+                    <section class="profile-details-pane">
+                        
+                        <!-- Section: Favorites -->
+                        <div class="profile-pane-section">
+                            <h3 class="pane-section-title">⭐ Favori Rotalarım</h3>
+                            
+                            <div class="favorites-grid" id="profile-favorites-grid">
+                                <!-- Dynamic Card Content Loaded by JS -->
+                            </div>
+                            
+                            <div class="empty-state-box" id="favorites-empty-state" style="display: none;">
+                                <p>Henüz favori listenize eklenmiş bir seyahat rotası bulunmuyor.</p>
+                                <a href="index.html#trending" class="btn-card" style="margin-top: 12px; display: inline-flex;">Trend Rotaları İncele ➔</a>
+                            </div>
+                        </div>
+
+                        <!-- Section: Quiz History -->
+                        <div class="profile-pane-section" style="margin-top: 48px;">
+                            <h3 class="pane-section-title">🧭 Yapay Zeka Test Geçmişi</h3>
+                            
+                            <div class="quiz-history-table-wrapper" id="history-table-container">
+                                <table class="quiz-history-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tarih & Saat</th>
+                                            <th>Eşleşen Rota</th>
+                                            <th>İnceleme Linki</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="profile-quiz-history-body">
+                                        <!-- Dynamic Table Content Loaded by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="empty-state-box" id="history-empty-state" style="display: none;">
+                                <p>Henüz yapay zeka seyahat analizi testini çözmediniz.</p>
+                                <a href="quiz.html" class="btn-card" style="margin-top: 12px; display: inline-flex;">Analizi Başlat 🚀</a>
+                            </div>
+                        </div>
+                        
+                    </section>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info-col">
+                    <h3>seyahat<span>.ai</span></h3>
+                    <p>Yapay zeka motoru ile desteklenen, kişiselleştirilmiş rota keşifleri ve lüks tatil rehberleri sunan meta-arama seyahat portalıdır.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><span style="font-size:18px;">📸</span></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><span style="font-size:18px;">👥</span></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><span style="font-size:18px;">🐦</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Ana Sayfa</a>
+                        <a href="quiz.html">Yapay Zeka Testi</a>
+                        <a href="index.html#trending">Trend Rotalar</a>
+                        <a href="index.html#why-us">Neden Biz?</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popüler Rotalar</h4>
+                    <div class="footer-links">
+                        <a href="destinations/destinasyon.html?id=bali-luxury-escape">Bali Egzotik Orman</a>
+                        <a href="destinations/destinasyon.html?id=cappadocia-cave-suites">Kapadokya Mağara</a>
+                        <a href="destinations/destinasyon.html?id=swiss-alps-chalets">İsviçre Karlı Şaleler</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Yasal</h4>
+                    <div class="footer-links">
+                        <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
+                        <a href="gizlilik-sozlesmesi.html">Gizlilik Sözleşmesi</a>
+                        <a href="cerez-politikasi.html">Çerez Politikası</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Seyahat AI. Tüm hakları saklıdır. Bu site Booking.com ve Travelpayouts iş ortağıdır.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">İletişim</a>
+                    <a href="#">Destek</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/config.js"></script>
+    <script src="./js/rotalar.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/main.js"></script>
+    
+    <!-- Profile Page Specific Renderer JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = SEYAHAT_AUTH.getLoggedInUser();
+            
+            const loggedOutBlock = document.getElementById('profile-logged-out-block');
+            const loggedInBlock = document.getElementById('profile-logged-in-block');
+            
+            if (!user) {
+                // Giriş yapılmamışsa: Giriş yap uyarısını göster
+                loggedOutBlock.style.display = 'block';
+                loggedInBlock.style.display = 'none';
+                
+                document.getElementById('profile-login-btn').addEventListener('click', () => {
+                    SEYAHAT_AUTH.openAuthModal();
+                });
+                return;
+            }
+            
+            // Giriş yapılmışsa: Kontrol panelini göster
+            loggedOutBlock.style.display = 'none';
+            loggedInBlock.style.display = 'block';
+            
+            // Profil bilgilerini yazdır
+            document.getElementById('user-display-name').innerText = user.name;
+            document.getElementById('user-display-email').innerText = user.email;
+            document.getElementById('user-display-level').innerText = user.level;
+            document.getElementById('user-display-date').innerText = user.registeredAt || '15.07.2026';
+            document.getElementById('user-avatar-placeholder').innerText = user.name.charAt(0).toUpperCase();
+            
+            document.getElementById('sidebar-logout-btn').addEventListener('click', () => {
+                SEYAHAT_AUTH.logout();
+            });
+            
+            // --- FAVORİ ROTALARI ÇEK VE LİSTELE ---
+            const favsGrid = document.getElementById('profile-favorites-grid');
+            const favsEmptyState = document.getElementById('favorites-empty-state');
+            
+            function renderFavorites(userFavorites) {
+                if (!userFavorites || userFavorites.length === 0) {
+                    favsGrid.style.display = 'none';
+                    favsEmptyState.style.display = 'block';
+                } else {
+                    favsGrid.style.display = 'grid';
+                    favsEmptyState.style.display = 'none';
+                    
+                    let favsCardsHtml = '';
+                    userFavorites.forEach(routeId => {
+                        const route = SEYAHAT_ROUTES_DATA[routeId];
+                        if (route) {
+                            favsCardsHtml += `
+                                <article class="route-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.02); position: relative;">
+                                    <button class="btn-remove-fav" data-route-id="${routeId}" aria-label="Favorilerden Kaldır" title="Favorilerden Kaldır">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="route-img-wrapper" style="height: 180px;">
+                                        <span class="route-tag" style="top: 15px; left: 15px; font-size: 10px; padding: 4px 10px;">${route.badge.split(' • ')[0]}</span>
+                                        <img src="${route.heroImage.replace('../', './')}" alt="${route.title}">
+                                    </div>
+                                    <div class="route-info" style="padding: 20px;">
+                                        <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--color-primary);">${route.title}</h4>
+                                        <p style="font-size: 13px; margin-bottom: 16px; line-height: 1.5;">${route.intro.substring(0, 100)}...</p>
+                                        <div class="route-footer" style="padding-top: 12px;">
+                                            <div class="route-meta">
+                                                <span class="meta-label">Bütçe</span>
+                                                <span class="meta-value" style="font-size: 13px;">${route.badge.split(' • ').slice(-1)[0]}</span>
+                                            </div>
+                                            <a href="destinations/destinasyon.html?id=${routeId}" class="btn-card" style="padding: 8px 16px; font-size: 12px;">Keşfet ➔</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            `;
+                        }
+                    });
+                    
+                    favsGrid.innerHTML = favsCardsHtml;
+
+                    // Favorilerden çıkarma butonlarını dinle
+                    favsGrid.querySelectorAll('.btn-remove-fav').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const routeId = btn.getAttribute('data-route-id');
+                            const res = SEYAHAT_AUTH.toggleFavorite(routeId);
+                            if (res.success) {
+                                renderFavorites(res.favorites);
+                            }
+                        });
+                    });
+                }
+            }
+            
+            renderFavorites(user.favorites || []);
+            
+            // --- QUIZ GEÇMİŞİNİ LİSTELE ---
+            const historyBody = document.getElementById('profile-quiz-history-body');
+            const historyTable = document.getElementById('history-table-container');
+            const historyEmptyState = document.getElementById('history-empty-state');
+            
+            const userHistory = user.quizHistory || [];
+            
+            if (userHistory.length === 0) {
+                historyTable.style.display = 'none';
+                historyEmptyState.style.display = 'block';
+            } else {
+                historyTable.style.display = 'block';
+                historyEmptyState.style.display = 'none';
+                
+                let historyHtml = '';
+                userHistory.forEach(item => {
+                    historyHtml += `
+                        <tr>
+                            <td><strong>📅 ${item.date.split(' - ')[0]}</strong> <span style="font-size: 12px; color: var(--color-muted);">${item.date.split(' - ')[1] || ''}</span></td>
+                            <td><span class="badge" style="background-color: var(--color-accent-light); color: var(--color-accent); border: none; font-size: 12px; padding: 4px 12px; text-transform: none; letter-spacing: 0; margin-bottom: 0;">${item.routeTitle}</span></td>
+                            <td><a href="destinations/destinasyon.html?id=${item.routeId}" class="btn-card" style="padding: 6px 14px; font-size: 12px; display: inline-flex;">İncele ➔</a></td>
+                        </tr>
+                    `;
+                });
+                
+                historyBody.innerHTML = historyHtml;
+            }
+        });
+    </script>
+</body>
+</html>

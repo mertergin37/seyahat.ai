@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seyahat AI - Yapay Zeka Destekli Seyahat Keşif ve Karşılaştırma Portalı</title>
+    <meta name="description" content="Yapay zeka teknolojisi ile kişiselleştirilmiş seyahat rotaları keşfedin. En iyi otelleri, uçak biletlerini ve transferleri karşılaştırın.">
+    <link rel="stylesheet" href="./css/theme.css?v=1.3">
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+    
+    <!-- Open Graph / Social Share Metadata -->
+    <meta property="og:title" content="seyahat.ai - Yapay Zeka Seyahat Analizi">
+    <meta property="og:description" content="Yapay zeka teknolojisi ile kişiselleştirilmiş seyahat rotaları keşfedin. En iyi otelleri, uçak biletlerini ve transferleri karşılaştırın.">
+    <meta property="og:image" content="./assets/images/og-share-cover.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar" id="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo" id="logo-link">seyahat<span>.ai</span></a>
+            
+            <nav class="nav-menu" id="navigation-menu">
+                <a href="index.html" class="nav-link active" id="nav-home">Ana Sayfa</a>
+                <a href="#trending" class="nav-link" id="nav-destinations">Trend Rotalar</a>
+                <a href="#why-us" class="nav-link" id="nav-why-us">Neden Biz?</a>
+                <a href="quiz.html" class="nav-cta" id="nav-start-quiz">Seyahat Analizi Başlat</a>
+            </nav>
+            
+            <button class="nav-toggle" id="menu-toggle" aria-label="Menüyü Aç/Kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home-hero">
+        <div class="hero-bg">
+            <img src="./assets/images/hero_bg.jpg" alt="Seyahat AI Eşsiz Doğa Manzarası" id="hero-background-img">
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge" id="hero-badge-tag">Yapay Zeka Destekli Keşif</span>
+                <h1 id="hero-main-heading">Yapay Zeka İlhamıyla Tasarlandı.<br><span>Gerçek Dünyada Seyahat Etmeniz İçin Hazırlandı.</span></h1>
+                <p id="hero-subtext">Seyahat tarzınızı analiz eden gelişmiş yapay zeka modelimizle, ruhunuza en uygun destinasyonları ve bütçenize en uygun konaklama seçeneklerini dakikalar içinde keşfedin.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Widget Section -->
+    <section class="container" id="search-section">
+        <div class="search-widget" id="main-search-widget">
+            <div class="widget-tabs" role="tablist" id="widget-tab-container">
+                <button class="tab-btn active" data-tab="flights" role="tab" aria-selected="true" id="tab-flights-btn">
+                    <span>✈️</span> Uçak
+                </button>
+                <button class="tab-btn" data-tab="hotels" role="tab" aria-selected="false" id="tab-hotels-btn">
+                    <span>🏨</span> Otel
+                </button>
+                <button class="tab-btn" data-tab="transfers" role="tab" aria-selected="false" id="tab-transfers-btn">
+                    <span>🚗</span> Transfer
+                </button>
+                <button class="tab-btn" data-tab="activities" role="tab" aria-selected="false" id="tab-activities-btn">
+                    <span>🎫</span> Etkinlik
+                </button>
+            </div>
+            
+            <div class="widget-panes" id="widget-panes-container">
+                <!-- Flight Search Pane -->
+                <div class="pane active" id="flights" role="tabpanel">
+                    <form class="search-form" id="flight-form">
+                        <div class="form-group">
+                            <label for="flight-from">Nereden</label>
+                            <input type="text" class="form-control" id="flight-from" placeholder="Örn: Istanbul (IST)" value="Istanbul" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="flight-to">Nereye</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" class="form-control" id="flight-to" placeholder="Örn: Bali (DPS) veya Şehir" autocomplete="off" required>
+                                <div class="autocomplete-suggestions" id="flight-autocomplete"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="flight-date">Gidiş Tarihi</label>
+                            <input type="date" class="form-control" id="flight-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="flight-return-date">Dönüş Tarihi</label>
+                            <input type="date" class="form-control" id="flight-return-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="flight-passengers">Yolcu Sayısı</label>
+                            <select class="form-control" id="flight-passengers">
+                                <option value="1">1 Yolcu, Ekonomi</option>
+                                <option value="2">2 Yolcu, Ekonomi</option>
+                                <option value="3">3 Yolcu, Ekonomi</option>
+                                <option value="1-business">1 Yolcu, Business</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-search" id="btn-submit-flights">
+                            Uçuş Bul 🚀
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Hotel Search Pane -->
+                <div class="pane" id="hotels" role="tabpanel">
+                    <form class="search-form" id="hotel-form">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label for="hotel-destination">Şehir veya Otel Adı</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" class="form-control" id="hotel-destination" placeholder="Örn: Cappadocia Cave Suites, Bali..." autocomplete="off" required>
+                                <div class="autocomplete-suggestions" id="hotel-autocomplete"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotel-checkin">Giriş Tarihi</label>
+                            <input type="date" class="form-control" id="hotel-checkin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotel-checkout">Çıkış Tarihi</label>
+                            <input type="date" class="form-control" id="hotel-checkout" required>
+                        </div>
+                        <button type="submit" class="btn-search" id="btn-submit-hotels">
+                            Otel Bul 🏨
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Transfer Search Pane -->
+                <div class="pane" id="transfers" role="tabpanel">
+                    <form class="search-form" id="transfer-form">
+                        <div class="form-group">
+                            <label for="transfer-from">Alış Noktası</label>
+                            <input type="text" class="form-control" id="transfer-from" placeholder="Örn: Havalimanı, Otel" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-to">Bırakış Noktası</label>
+                            <input type="text" class="form-control" id="transfer-to" placeholder="Örn: Hedef Otel veya Adres" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-date">Tarih & Saat</label>
+                            <input type="datetime-local" class="form-control" id="transfer-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="transfer-passengers">Yolcu Sayısı</label>
+                            <select class="form-control" id="transfer-passengers">
+                                <option value="1">1-3 Kişi (Sedan)</option>
+                                <option value="4">4-7 Kişi (Minivan)</option>
+                                <option value="8">8+ Kişi (Vito/Sprinter)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-search" id="btn-submit-transfers">
+                            Transfer Ara 🚗
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Activity Search Pane -->
+                <div class="pane" id="activities" role="tabpanel">
+                    <form class="search-form" id="activity-form">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label for="activity-destination">Şehir veya Etkinlik Adı</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" class="form-control" id="activity-destination" placeholder="Örn: Roma, Müze Giriş Bileti, Tur..." autocomplete="off" required>
+                                <div class="autocomplete-suggestions" id="activity-autocomplete"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-date">Tarih</label>
+                            <input type="date" class="form-control" id="activity-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-tickets">Bilet / Kişi Sayısı</label>
+                            <select class="form-control" id="activity-tickets">
+                                <option value="1">1 Yetişkin</option>
+                                <option value="2">2 Yetişkin</option>
+                                <option value="3">3 Yetişkin</option>
+                                <option value="4">4+ Yetişkin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-search" id="btn-submit-activities">
+                            Etkinlik Bul 🎫
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Destinations Grid -->
+    <section class="section section-bg" id="trending">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trend Olan <span>Yapay Zeka Rotaları</span></h2>
+                <p>En popüler seyahat kriterleri ve yapay zeka yönlendirmeleri ile seçilmiş, bu ayın en çok ilgi gören lüks kaçış rotaları.</p>
+            </div>
+            
+            <div class="routes-grid" id="destinations-grid-container">
+                <!-- Bali Card -->
+                <article class="route-card" id="card-bali">
+                    <div class="route-img-wrapper">
+                        <span class="route-tag">Tropikal & Macera</span>
+                        <img src="./assets/images/bali_card.jpg" alt="Bali Egzotik Orman Görünümü" id="img-bali-card">
+                    </div>
+                    <div class="route-info">
+                        <h3>Bali Egzotik Kaçış</h3>
+                        <p>Eşsiz tropikal doğa, Ubud'un yemyeşil yağmur ormanları, gizemli tapınaklar ve macera dolu pirinç terasları ile premium bir kaçış.</p>
+                        <div class="route-footer">
+                            <div class="route-meta">
+                                <span class="meta-label">Bütçe Seviyesi</span>
+                                <span class="meta-value">Premium</span>
+                            </div>
+                            <a href="destinations/destinasyon.html?id=bali-luxury-escape" class="btn-card" id="btn-route-bali">Rotayı Keşfet <span>➔</span></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Cappadocia Card -->
+                <article class="route-card" id="card-cappadocia">
+                    <div class="route-img-wrapper">
+                        <span class="route-tag">Tarih & Romantizm</span>
+                        <img src="./assets/images/cappadocia_card.jpg" alt="Kapadokya Balonlar ve Peribacaları" id="img-cappadocia-card">
+                    </div>
+                    <div class="route-info">
+                        <h3>Kapadokya Mağara Rüyası</h3>
+                        <p>Tarihi taş konaklar, sabah gökyüzünü süsleyen rengarenk sıcak hava balonları ve mistik vadilerde unutulmaz bir romantizm.</p>
+                        <div class="route-footer">
+                            <div class="route-meta">
+                                <span class="meta-label">Bütçe Seviyesi</span>
+                                <span class="meta-value">Orta Seviye</span>
+                            </div>
+                            <a href="destinations/destinasyon.html?id=cappadocia-cave-suites" class="btn-card" id="btn-route-cappadocia">Rotayı Keşfet <span>➔</span></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Swiss Alps Card -->
+                <article class="route-card" id="card-swiss">
+                    <div class="route-img-wrapper">
+                        <span class="route-tag">Kış & Sakinlik</span>
+                        <img src="./assets/images/swiss_card.jpg" alt="Karlı İsviçre Alpleri ve Dağ Evi" id="img-swiss-card">
+                    </div>
+                    <div class="route-info">
+                        <h3>İsviçre Alpleri Kış Masalı</h3>
+                        <p>Karla kaplı heybetli dağ zirveleri, şömine başı sıcaklığı sunan özel ahşap şaleler ve huzur veren bembeyaz bir doğa.</p>
+                        <div class="route-footer">
+                            <div class="route-meta">
+                                <span class="meta-label">Bütçe Seviyesi</span>
+                                <span class="meta-value">Premium Lüks</span>
+                            </div>
+                            <a href="destinations/destinasyon.html?id=swiss-alps-chalets" class="btn-card" id="btn-route-swiss">Rotayı Keşfet <span>➔</span></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="section section-why-us" id="why-us">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge badge-dark" style="margin-bottom: 16px;">Güvenli & Akıllı Rotalar</span>
+                <h2><span>Neden</span> seyahat<span>.ai</span>?</h2>
+                <p>Seyahat planlamanızı yapay zeka gücü ve en güvenilir ortaklıklarla kusursuz hale getiriyoruz.</p>
+            </div>
+            
+            <div class="why-us-grid">
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg class="why-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="3"></line>
+                            <line x1="15" y1="1" x2="15" y2="3"></line>
+                            <line x1="9" y1="21" x2="9" y2="23"></line>
+                            <line x1="15" y1="21" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="15" x2="23" y2="15"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="15" x2="4" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Akıllı Eşleştirme</h3>
+                    <p>Klasik acentelerin aksine seyahat tarzınızı analiz eden algoritmalarımızla ruhunuza en uygun destinasyonları belirleriz.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg class="why-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M12 8v4"></path>
+                            <path d="M12 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Booking.com Güvencesi</h3>
+                    <p>Tüm otel rezervasyonlarınızı dünyanın en güvenilir platformu üzerinden en iyi fiyat garantisi ve esnek iptal haklarıyla tamamlarsınız.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg class="why-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            <path d="M12 7v5l3 3"></path>
+                        </svg>
+                    </div>
+                    <h3>7/24 Canlı VIP Destek</h3>
+                    <p>Seyahat planınızın her aşamasında WhatsApp VIP destek hattımız üzerinden uzman seyahat danışmanlarımıza anında ulaşabilirsiniz.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <svg class="why-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Seçkin & Denetlenmiş</h3>
+                    <p>Sadece 9.0+ üzeri puan almış, yüksek konfora ve kusursuz müşteri memnuniyetine sahip premium otel seçeneklerini sunarız.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info-col">
+                    <h3>seyahat<span>.ai</span></h3>
+                    <p>Yapay zeka motoru ile desteklenen, kişiselleştirilmiş rota keşifleri ve lüks tatil rehberleri sunan meta-arama seyahat portalıdır.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Instagram"><span style="font-size:18px;">📸</span></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><span style="font-size:18px;">👥</span></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><span style="font-size:18px;">🐦</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Ana Sayfa</a>
+                        <a href="quiz.html">Yapay Zeka Testi</a>
+                        <a href="#trending">Trend Rotalar</a>
+                        <a href="#why-us">Neden Biz?</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popüler Rotalar</h4>
+                    <div class="footer-links">
+                        <a href="destinations/destinasyon.html?id=bali-luxury-escape">Bali Egzotik Orman</a>
+                        <a href="destinations/destinasyon.html?id=cappadocia-cave-suites">Kapadokya Mağara</a>
+                        <a href="destinations/destinasyon.html?id=swiss-alps-chalets">İsviçre Karlı Şaleler</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Yasal</h4>
+                    <div class="footer-links">
+                        <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
+                        <a href="gizlilik-sozlesmesi.html">Gizlilik Sözleşmesi</a>
+                        <a href="cerez-politikasi.html">Çerez Politikası</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Seyahat AI. Tüm hakları saklıdır. Bu site Booking.com ve Travelpayouts iş ortağıdır.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">İletişim</a>
+                    <a href="#">Destek</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JS -->
+    <script src="./js/config.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        // Set today's date in search form inputs
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            const nextWeek = new Date(Date.now() + 86400000 * 8).toISOString().split('T')[0];
+            
+            if(document.getElementById('flight-date')) {
+                document.getElementById('flight-date').value = tomorrow;
+            }
+            if(document.getElementById('flight-return-date')) {
+                document.getElementById('flight-return-date').value = nextWeek;
+            }
+            if(document.getElementById('hotel-checkin')) {
+                document.getElementById('hotel-checkin').value = tomorrow;
+                document.getElementById('hotel-checkout').value = nextWeek;
+            }
+            if(document.getElementById('transfer-date')) {
+                document.getElementById('transfer-date').value = tomorrow + 'T12:00';
+            }
+            if(document.getElementById('activity-date')) {
+                document.getElementById('activity-date').value = tomorrow;
+            }
+        });
+    </script>
+</body>
+</html>
