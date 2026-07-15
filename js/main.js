@@ -100,9 +100,10 @@ const initMain = () => {
                 return;
             }
 
-            // Route to booking flight search or a fallback search
-            const bookingFlightUrl = `https://www.booking.com/flights/search.html?dep_airport=${encodeURIComponent(from)}&arr_airport=${encodeURIComponent(to)}&chk_out=${date}&chk_in=${returnDate}&aid=${SeyahatAIConfig.affiliateId}`;
-            window.open(bookingFlightUrl, '_blank');
+            // Route to Kiwi.com via Travelpayouts affiliate link
+            const targetUrl = `https://www.kiwi.com/tr/search/results/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date}/${returnDate || 'no-return'}`;
+            const kiwiUrl = `https://kiwi.tpk.mx/gtCsLx4Y?url=${encodeURIComponent(targetUrl)}`;
+            window.open(kiwiUrl, '_blank');
         });
     }
 
