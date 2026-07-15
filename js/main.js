@@ -150,9 +150,10 @@ const initMain = () => {
                 return;
             }
 
-            // Route to booking attractions search
-            const bookingAttractionsUrl = `https://www.booking.com/attractions/search.html?query=${encodeURIComponent(query)}&aid=${SeyahatAIConfig.affiliateId}`;
-            window.open(bookingAttractionsUrl, '_blank');
+            // Route to Klook Attractions search/portal using user's affiliate link
+            const targetUrl = `https://www.klook.com/tr/search/result/?query=${encodeURIComponent(query)}`;
+            const klookUrl = `https://klook.tpk.mx/Si3mONKq?url=${encodeURIComponent(targetUrl)}`;
+            window.open(klookUrl, '_blank');
         });
     }
 
