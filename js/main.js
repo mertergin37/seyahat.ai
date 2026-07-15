@@ -134,9 +134,9 @@ const initMain = () => {
                 return;
             }
 
-            // Route to booking taxi search or transfer page
-            const taxiUrl = `https://www.booking.com/taxi/index.tr.html?aid=${SeyahatAIConfig.affiliateId}`;
-            window.open(taxiUrl, '_blank');
+            // Route to transfer search via Travelpayouts affiliate link
+            const transferUrl = `https://tpk.mx/12UauBQr`;
+            window.open(transferUrl, '_blank');
         });
     }
 
