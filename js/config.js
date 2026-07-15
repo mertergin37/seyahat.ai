@@ -6,9 +6,12 @@ window.SeyahatAIConfig = {
     // Destek hattı için WhatsApp telefon numaranız (Uluslararası formatta, boşluksuz)
     whatsappNumber: "905312198940",
     
-    // Kullanıcıların doğrudan arama yapabileceği genel Booking.com ana linki
-    getBookingSearchLink: function(destination = "") {
-        return `https://www.booking.com/searchresults.tr.html?ss=${encodeURIComponent(destination)}&aid=${this.affiliateId}`;
+    // Kullanıcıların doğrudan arama yapabileceği genel Booking.com ana linki (tarih dahil)
+    getBookingSearchLink: function(destination = "", checkin = "", checkout = "") {
+        let url = `https://www.booking.com/searchresults.tr.html?ss=${encodeURIComponent(destination)}&aid=${this.affiliateId}`;
+        if (checkin)  url += `&checkin=${checkin}`;
+        if (checkout) url += `&checkout=${checkout}`;
+        return url;
     },
     
     // WhatsApp VIP yönlendirme linki oluşturucu

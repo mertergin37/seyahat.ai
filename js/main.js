@@ -91,8 +91,8 @@ const initMain = () => {
         flightForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const from = document.getElementById('flight-from').value || 'Istanbul';
-            const to = document.getElementById('flight-to').value;
-            const date = document.getElementById('flight-date').value;
+            const to   = document.getElementById('flight-to').value;
+            const date = document.getElementById('flight-date').value;          // YYYY-MM-DD
             const returnDate = document.getElementById('flight-return-date').value;
             
             if (!to) {
@@ -100,8 +100,10 @@ const initMain = () => {
                 return;
             }
 
-            // Route to Kiwi.com via Travelpayouts affiliate link
-            const targetUrl = `https://www.kiwi.com/tr/search/results/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date}/${returnDate || 'no-return'}`;
+            // Kiwi.com deep link with origin, destination and dates
+            // Format: /search/results/{from}/{to}/{dep_date}/{ret_date}
+            const retPart = returnDate ? returnDate : 'no-return';
+            const targetUrl = `https://www.kiwi.com/tr/search/results/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${date}/${retPart}`;
             const kiwiUrl = `https://kiwi.tpk.mx/gtCsLx4Y?url=${encodeURIComponent(targetUrl)}`;
             window.open(kiwiUrl, '_blank');
         });
@@ -111,14 +113,16 @@ const initMain = () => {
         hotelForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const destination = document.getElementById('hotel-destination').value;
+            const checkin     = document.getElementById('hotel-checkin').value;   // YYYY-MM-DD
+            const checkout    = document.getElementById('hotel-checkout').value;  // YYYY-MM-DD
             
             if (!destination) {
                 alert('Lütfen gitmek istediğiniz şehri veya oteli yazın.');
                 return;
             }
 
-            // Route to booking hotel search using custom generator
-            const bookingHotelUrl = SeyahatAIConfig.getBookingSearchLink(destination);
+            // Booking.com deep link with destination + check-in/out dates
+            const bookingHotelUrl = SeyahatAIConfig.getBookingSearchLink(destination, checkin, checkout);
             window.open(bookingHotelUrl, '_blank');
         });
     }
@@ -126,16 +130,22 @@ const initMain = () => {
     if (transferForm) {
         transferForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const from = document.getElementById('transfer-from').value;
-            const to = document.getElementById('transfer-to').value;
+            const from     = document.getElementById('transfer-from').value;
+            const to       = document.getElementById('transfer-to').value;
+            const dateTime = document.getElementById('transfer-date').value; // datetime-local
             
             if (!from || !to) {
                 alert('Lütfen alış ve bırakış noktalarını doldurunuz.');
                 return;
             }
 
-            // Route to transfer search via Travelpayouts affiliate link
-            const transferUrl = `https://tpk.mx/12UauBQr`;
+            // Transfer deep link – pass pickup/dropoff and datetime as query params
+            const dateOnly = dateTime ? dateTime.split('T')[0] : '';
+            const timeOnly = dateTime ? dateTime.split('T')[1] : '';
+            let targetUrl = `https://transfers.travelpayouts.com/?pickup=${encodeURIComponent(from)}&dropoff=${encodeURIComponent(to)}`;
+            if (dateOnly) targetUrl += `&date=${dateOnly}`;
+            if (timeOnly) targetUrl += `&time=${timeOnly}`;
+            const transferUrl = `https://tpk.mx/12UauBQr?url=${encodeURIComponent(targetUrl)}`;
             window.open(transferUrl, '_blank');
         });
     }
@@ -144,15 +154,17 @@ const initMain = () => {
     if (activityForm) {
         activityForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const query = document.getElementById('activity-destination').value;
+            const query   = document.getElementById('activity-destination').value;
+            const actDate = document.getElementById('activity-date').value;  // YYYY-MM-DD
             
             if (!query) {
                 alert('Lütfen gitmek istediğiniz şehri veya etkinlik adını yazın.');
                 return;
             }
 
-            // Route to Klook Attractions search/portal using user's affiliate link
-            const targetUrl = `https://www.klook.com/tr/search/result/?query=${encodeURIComponent(query)}`;
+            // Klook deep link with search query + date
+            let targetUrl = `https://www.klook.com/tr/search/result/?query=${encodeURIComponent(query)}`;
+            if (actDate) targetUrl += `&startDate=${actDate}`;
             const klookUrl = `https://klook.tpk.mx/Si3mONKq?url=${encodeURIComponent(targetUrl)}`;
             window.open(klookUrl, '_blank');
         });
