@@ -3,14 +3,25 @@
 const SEYAHAT_AUTH = {
     // 1. Oturum durumunu getirme
     getLoggedInUser: function() {
-        const session = localStorage.getItem('seyahat_ai_session');
-        return session ? JSON.parse(session) : null;
+        try {
+            const session = localStorage.getItem('seyahat_ai_session');
+            return session ? JSON.parse(session) : null;
+        } catch (e) {
+            console.error("Session parse error", e);
+            localStorage.removeItem('seyahat_ai_session');
+            return null;
+        }
     },
 
     // 2. Kullanıcı veri tabanını getirme (email -> user şeklinde saklanır)
     _getUsersDB: function() {
-        const db = localStorage.getItem('seyahat_ai_users');
-        return db ? JSON.parse(db) : {};
+        try {
+            const db = localStorage.getItem('seyahat_ai_users');
+            return db ? JSON.parse(db) : {};
+        } catch (e) {
+            console.error("Users DB parse error", e);
+            return {};
+        }
     },
 
     // 3. Giriş Yap Simülasyonu
@@ -189,7 +200,7 @@ const SEYAHAT_AUTH = {
         } else {
             // Giriş Yapılmamışsa: Giriş Yap / Üye Ol butonu göster
             container.innerHTML = `
-                <button type="button" class="nav-link login-trigger-btn" id="navbar-login-trigger" style="border: none; cursor: pointer; font-family: var(--font-sans);">
+                <button type="button" class="nav-cta login-trigger-btn" id="navbar-login-trigger" style="border: none; cursor: pointer; font-family: var(--font-sans);">
                     🔑 Giriş Yap
                 </button>
             `;
