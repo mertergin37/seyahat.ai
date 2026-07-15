@@ -377,7 +377,13 @@ const SEYAHAT_AUTH = {
 };
 
 // Sayfa yüklendiğinde otomatik olarak başlat
-document.addEventListener('DOMContentLoaded', () => {
+const initAuth = () => {
     SEYAHAT_AUTH.initAuthModal();
     SEYAHAT_AUTH.updateNavbarAuthUI();
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuth);
+} else {
+    initAuth();
+}

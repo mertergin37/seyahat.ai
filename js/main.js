@@ -3,7 +3,7 @@ const savedTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
 // Main UI Interactions and Search Submissions
-document.addEventListener('DOMContentLoaded', () => {
+const initMain = () => {
     // Force logo styling to prevent flex gaps or caching space issues
     const logoLink = document.getElementById('logo-link');
     if (logoLink) {
@@ -301,4 +301,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     initThemeToggle();
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMain);
+} else {
+    initMain();
+}
